@@ -1,0 +1,137 @@
+{% extends 'LazapeeApp/navbar.html' %}
+{% load static %}
+
+{% block content %}
+<body>
+    <div class="container mt-3">
+
+        <div class="card">
+            <h5 class="card-header">Payroll Creation</h5>
+            <div class="card-body">
+                <form method="POST" action="{%url 'payroll' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {% if messages %}
+                            {% for message in messages %}
+                                {% if message.tags == 'success' %}
+                                <div class="alert alert-success" role="alert"> {{ message }}</div>
+                                {% endif %}
+        
+                                {% if message.tags == 'error' %}
+                                <div class="alert alert-danger" role="alert"> {{ message }}</div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        <label class="mb-2">Payroll for:</label>
+                        <select name="employeeid" id="employeeid" class="form-control" aria-label="Default select example"> 
+                            <!--pls edit accordingly!!!!!-->
+                            <option selected>Select employee</option>
+                            <option value="ALL">All Employees</option>
+
+                            {% for e in employees %}
+                            <option value="{{ e.id_number }}"> {{ e.name }} - {{ e.id_number }} </option>
+                            {% endfor %}
+                        </select>
+        
+        
+                        <div class="row g-3 mt-3">
+                            <div class="col-sm">
+                                <label class="mb-2">Month</label>
+                                <select name="month" id="month" class="form-control" placeholder="Select Month"> 
+                                    <!--pls edit accordingly!!!!!-->
+                                    <option value="1">January</option>
+                                    <option value="2">February</option>
+                                    <option value="3">March</option>
+                                    <option value="4">April</option>
+                                    <option value="5">May</option>
+                                    <option value="6">June</option>
+                                    <option value="7">July</option>
+                                    <option value="8">August</option>
+                                    <option value="9">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                            </div>
+        
+                            <!--pls edit accordingly!!!!!-->
+                            <div class="col-sm">
+                                <label class="mb-2">Year</label>
+                                <input type="text" name="year" class="form-control" id= "year" placeholder="2024" aria-label="State">
+                            </div>
+        
+                            <div class="col-sm">
+                                <label class="mb-2">Cycle</label>
+                                <select name="cycle" class="form-control" id="cycle" aria-label="Default select example"> 
+                                    <option selected>Select cycle</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
+                            </div>
+                        </div>
+        
+                    </div>
+        
+                    <!--button-->
+                    <div class="mx-auto text-center mt-3">
+                        <button type="submit" href="{%url 'payroll' %}" class="btn btn-dark" style="background-color: #FF6600;">Save</button>
+                    </div>
+        
+                </form>
+            </div>
+        </div>
+
+        
+
+        <div class="row">
+            <div class="col-md-10">
+                <h2 class="mb-4 mt-3">Payslips Summary</h2>
+            </div>
+        </div>
+
+    
+        
+
+        <div class="row pb-xxl-5 ">
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                    <th scope="col">ID Number</th>
+                    <th scope="col">Month</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Year</th>
+                    <th scope="col">Cycle</th>
+                    <th scope="col">Total Pay</th>
+                    <th scope="col">Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!--pls edit accordingly!!!!!-->
+                    {% for p in payslips %}
+                    <tr>
+                    <th scope="row">{{ p.id_number.getID }}</th>
+                    <td>{{p.month}}</td>
+                    <td>{{ p.date_range }}</a></td>
+                    <td>{{p.year}}</td>
+                    <td>{{ p.pay_cycle }}</td>
+                    <td>{{ p.total_pay }}</td>
+                    <td> 
+                        <div class="row mx-1">
+                        <a href="{% url 'payslip' pk=p.pk %}"  class="btn btn-dark btn-sm btn-secondary" style="background-color: #FF6600;">
+                            Print
+                        </a>
+                        </div> 
+                    </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+        </div>
+
+        
+
+    </div>
+
+</body>
+{% endblock %}

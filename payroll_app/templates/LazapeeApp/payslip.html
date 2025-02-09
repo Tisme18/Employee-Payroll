@@ -1,0 +1,195 @@
+{% extends 'LazapeeApp/navbar.html' %}
+{% load static %}
+
+{% block content %}
+<body>
+    <div class="container mt-3">
+
+        <div class="row">
+            <div class="col">
+                <h5 class="mb-4 text-center"> Print Payslip</h5>
+            </div>
+        </div>
+
+        <!--employee info header-->
+        <div class="row">
+            <div class="col-md-5">
+                <p class="text-start"> NAME: {{payslip.id_number.getName}}</p>
+                <p class="text-start"> ID NUMBER: {{payslip.id_number.getID}}</p>
+            </div>
+
+            <div class="col-md-5">
+                <p class="text-sm-end"> DATE: {{payslip.month}} {{payslip.date_range}} {{payslip.year}}</p>
+                <p class="text-sm-end"> PAYSLIP ID: {{payslip.pk}}</p>
+            </div>
+        </div>
+
+        <!--EARNINGS-->
+       
+        <!--Amount Row-->
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="col-5">
+            </div>
+            <div class="col text-center">
+                <strong>AMOUNT</strong>
+            </div>
+        </div>
+        <div class="row">
+            <div></div>
+        </div>
+        <!--Earnings Row-->
+        <div class="row">
+            <div class="col">
+                <strong>EARNINGS:</strong>
+            </div>
+            <div class="col-md-auto">
+            </div>
+            <div class="col col-lg-2">
+            </div>
+        </div>
+
+
+            <!--Values: modify accordingly // each row chunk is one row-->
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        Base Pay
+                    </div>
+                    <div class="col-5 text-end">
+                        {{payslip.getCycleRate}}
+                    </div>
+                    <div class="col">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        Allowances
+                    </div>
+                    <div class="col-5 text-end">
+                        {{payslip.getEarnings_allowance}}
+                    </div>
+                    <div class="col">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        Overtime
+                    </div>
+                    <div class="col-5 text-end">
+                        {{payslip.getOvertime}}
+                    </div>
+                    <div class="col">
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col">
+                        <strong>GROSS PAY</strong>
+                    </div>
+                    <div class="col-5 text-end">
+                    </div>
+                    <div class="col text-center">
+                        <strong>PHP {{gross}}</strong>
+                    </div>
+                </div>
+
+            </div>
+        
+        <hr>
+
+        <!--DEDUCTIONS-->
+
+        <!--Earnings Row-->
+        <div class="row">
+            <div class="col">
+                <strong>DEDUCTIONS:</strong>
+            </div>
+            <div class="col-md-auto">
+            </div>
+            <div class="col col-lg-2">
+            </div>
+        </div>
+        
+            <!--Values: modify accordingly // each row chunk is one row-->
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        W/HOLDING TAX
+                    </div>
+                    <div class="col-5 text-end">
+                        {{payslip.deductions_tax}}
+                    </div>
+                    <div class="col">
+                    </div>
+                </div>
+
+                {% if payslip.getPay_cycle == 1 %}
+                <div class="row">
+                    <div class="col">
+                        PAG-IBIG
+                    </div>
+                    <div class="col-5 text-end">
+                        {{payslip.pag_ibig}}
+                    </div>
+                    <div class="col">
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if payslip.getPay_cycle == 2 %}
+                <div class="row">
+                    <div class="col">
+                        PHILHEALTH
+                    </div>
+                    <div class="col-5 text-end">
+                        {{payslip.deductions_health}}
+                    </div>
+                    <div class="col">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        SSS
+                    </div>
+                    <div class="col-5 text-end">
+                        {{payslip.sss}}
+                    </div>
+                    <div class="col">
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            <hr>
+
+            <div class="row">
+                <div class="col">
+                    <strong>TOTAL DEDUCTIONS</strong>
+                </div>
+                <div class="col-5 text-end">
+                </div>
+                <div class="col text-center">
+                    <strong>PHP {{total_deduct}}</strong>
+                </div>
+            </div>
+            <hr>
+
+            <div class="row">
+                <div class="col">
+                    <H5><strong>NET PAY:</strong></H5>
+                </div>
+                <div class="col-5 text-end">
+                </div>
+                <div class="col text-center">
+                    <strong>PHP {{payslip.total_pay}}</strong>
+                </div>
+            </div>
+    </div>
+</body>
+{% endblock %}

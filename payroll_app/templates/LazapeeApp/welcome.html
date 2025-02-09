@@ -1,0 +1,24 @@
+{% extends 'LazapeeApp/base.html' %}
+{% load static %}
+
+{% block nav %}
+<div class="container-fluid justify-content-center" style="background-color: #FF6600;">
+    <h4 class="navbar-brand mb-0 text-white"> LAZAPEE </h4>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-auto text-center">
+            <h1 class="mb-4">Welcome!</h1>
+            <p>Leading site in maintaining records of all employees and payslips.</p>
+            <br>
+            <br>
+            <a href="{% url 'login' %}" style="background-color: #FF6600;" class="btn btn-dark" type="button">
+                Get Started
+            </a>
+        </div>
+    </div>
+</div>         
+{% endblock %}

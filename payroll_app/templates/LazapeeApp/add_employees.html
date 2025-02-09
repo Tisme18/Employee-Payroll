@@ -1,0 +1,60 @@
+{% extends 'LazapeeApp/navbar.html' %}
+{% load static %}
+
+{% block content %}
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="mb-4">Add Employees</h2>
+
+
+                <!-- Display error messages if any -->
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.tags == 'success' %}
+                        <div class="alert alert-success" role="alert"> {{ message }}</div>
+                        {% endif %}
+
+                        {% if message.tags == 'error' %}
+                        <div class="alert alert-danger" role="alert"> {{ message }}</div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+
+                
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label class="mb-2 mt-2" for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Arbee Lizada" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="mb-2 mt-2" for="id_number">ID Number</label>
+                        <input type="number" class="form-control" id="id_number" name="id_number" placeholder="221518" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="mb-2 mt-2" for="rate">Rate</label>
+                        <input type="number" class="form-control" id="rate" name="rate" placeholder="1000" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="mb-2 mt-2" for="allowance">Allowance (optional) </label>
+                        <input type="number" class="form-control" id="allowance" name="allowance" placeholder="533.00">
+                    </div>
+
+                    <!--button group-->
+                    <div class="d-grid gap-4 d-md-block mt-3">
+                        <button type="Add" class="btn btn-dark" style="background-color: #FF6600;">Save</button>
+                        <a href="{% url 'employeelist' %}" class="btn btn-secondary">Cancel</a>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

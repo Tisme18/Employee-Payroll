@@ -1,0 +1,29 @@
+{% extends 'LazapeeApp/navbar.html' %}
+{% load static %}
+
+{% block content %}
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-10">
+                <h2 class="mb-4">Delete Employee?</h2>
+                <p>
+                    Employee will be removed from the database.
+                </p>
+            </div>
+        
+        </div>
+
+        <div class="row pb-xxl-5 ">
+            <button type="button" class="btn btn-secondary btn-block" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Delete
+            </button>
+            <button type="button" class="btn btn-secondary btn-block" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Cancel
+            </button>
+            
+        </div>
+    </div>
+
+</body>
+{% endblock %}

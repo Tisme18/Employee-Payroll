@@ -1,0 +1,49 @@
+{% extends 'LazapeeApp/navbar.html' %}
+{% load static %}
+
+{% block content %}
+<body>
+    <div class="container mt-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-6">
+                <h2 class="mb-4">Update Employee Info</h2>
+
+                <form action="{% url 'update_employee' pk=employees.pk %}" method="POST" style="display: inline;">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <p><strong>Name:</strong> {{employees.name}}</p> 
+                            </div>
+                            
+                            <div class="col">
+                                <p><strong>ID Number:</strong> {{ employees.id_number }}</p>
+                            </div>
+                        </div>
+                            
+                        <div class="row">
+                            <div class="col">
+                                <strong>Rate</strong>
+                                <input type="text" class="form-control" id="update_rate" name="update_rate" value="{{employees.rate}}">
+                            </div>    
+                            <div class="col">
+                                <p><strong>Allowance</strong>
+                                <input type="text" class="form-control" id="update_allowance" name="update_allowance" value="{{employees.allowance}}">
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary" style="width: 100%"> Save</button>           
+                            </div>
+                            <div class="col"> 
+                                <a href="{% url 'employeelist' %}" class="btn btn-secondary" style="width: 100%">Back to Employee List</a> 
+                            </div>
+                        </div> 
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}
