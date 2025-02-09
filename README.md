@@ -53,7 +53,7 @@ lazapee/
 
 Getting Started
 - Clone the Repository
-git clone https://github.com/yourusername/lazapee-payroll.git
+git clone https://github.com/Tisme18/lazapee-payroll.git
 cd lazapee-payroll
 - Install Dependencies
 pip install -r requirements.txt
